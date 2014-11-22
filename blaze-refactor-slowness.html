@@ -1,0 +1,60 @@
+<head>
+  <title>blaze-refactor-slowness</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="bold">
+    <b>{{this}}</b>
+</template>
+
+<template name="italic">
+    <i>{{this}}</i>
+</template>
+
+<template name="underline">
+    <u>{{this}}</u>
+</template>
+
+<template name="tlookup">
+    {{#with letter}}
+        {{value}}
+    {{/with}}
+</template>
+
+<template name="hello">
+  <h1>Blaze Slowness!</h1>
+  {{#if renderStuff}}
+    <button class="btn btn-danger">Un-render Stuff</button>
+    <table class="table table-striped">
+    {{#each stuff}}
+        <tr>
+            <td>
+                <dl class="dl-horizontal">
+                <dt>a</dt><dd>{{> tlookup "a"}}</dd>
+                <dt>b</dt><dd>{{> tlookup "b"}}</dd>
+                <dt>c</dt><dd>{{> tlookup "c"}}</dd>
+                <dt>d</dt><dd>{{> tlookup "d"}}</dd>
+                <dt>e</dt><dd>{{> tlookup "e"}}</dd>
+                <dt>_id</dt><dd>{{> italic _id}}</dd>
+                </dl>
+            </td>
+            <td>{{> descriptionList }}</td>
+        </tr>
+    {{/each}}
+    </table>
+  {{else}}
+    <button class="btn btn-success">Render Stuff</button>
+  {{/if}}
+</template>
+
+<template name="descriptionList">
+    <dl class="dl-horizontal">
+      {{#each properties}}
+          <dt>{{key}}</dt>
+          <dd>{{{value}}}</dd>
+      {{/each}}
+    </dl>
+</template>
