@@ -12,7 +12,7 @@ if (Meteor.isClient) {
       return Session.equals("render-stuff", true);
     },
     stuff: function () {
-      return Stuff.find();
+      return Stuff.find({}, {sort: {a: 1}, limit: 500});
     }
   });
 
@@ -66,7 +66,7 @@ if (Meteor.isServer) {
       }
     }
     if (Stuff.find().count() === 0) {
-      for( var i = 0; i < 200; i++ ) {
+      for( var i = 0; i < 500; i++ ) {
         Stuff.insert({
           a: i,
           b: "some text for B",
